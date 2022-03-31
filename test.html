@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>How to put PHP in HTML- Date Example</title>
+</head>
+
+<body>
+  <div>This is pure HTML message.</div>
+  <div>Next, we’ll display today’s date and day by PHP!</div>
+  <div>
+    <?php
+
+
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+    
+
+    require 'vendor/autoload.php';
+    
+
+    $sender = 'sender@example.com';
+    $senderName = 'Sender Name';
+    
+
+    $recipient = 'recipient@example.com';
+    
+
+    $usernameSmtp = 'smtp_username';
+    
+
+    $passwordSmtp = 'smtp_password';
+
+    $configurationSet = 'ConfigSet';
+    
+
+
+    $host = 'email-smtp.us-west-2.amazonaws.com';
+    $port = 587;
+    
+
+    $subject = 'Amazon SES test (SMTP interface accessed using PHP)';
+    
+
+    $bodyText =  "Email Test\r\nThis email was sent through the
+        Amazon SES SMTP interface using the PHPMailer class.";
+    
+
+    $bodyHtml = '<h1>Email Test</h1>
+        <p>This email was sent through the
+        <a href="https://aws.amazon.com/ses">Amazon SES</a> SMTP
+        interface using the <a href="https://github.com/PHPMailer/PHPMailer">
+        PHPMailer</a> class.</p>';
+    
+    $mail = new PHPMailer(true);
+    
+    try {
+        // Specify the SMTP settings.
+        $mail->isSMTP();
+        $mail->setFrom($sender, $senderName);
+        $mail->Username   = $usernameSmtp;
+        $mail->Password   = $passwordSmtp;
+        $mail->Host       = $host;
+        $mail->Port       = $port;
+        $mail->SMTPAuth   = true;
+        $mail->SMTPSecure = 'tls';
+        $mail->addCustomHeader('X-SES-CONFIGURATION-SET', $configurationSet);
+    
+
+        $mail->addAddress($recipient);
+
+    
+
+        $mail->isHTML(true);
+        $mail->Subject    = $subject;
+        $mail->Body       = $bodyHtml;
+        $mail->AltBody    = $bodyText;
+        $mail->Send();
+        echo "Email sent!" , PHP_EOL;
+    } catch (phpmailerException $e) {
+        echo "An error occurred. {$e->errorMessage()}", PHP_EOL; //Catch errors from PHPMailer.
+    } catch (Exception $e) {
+        echo "Email not sent. {$mail->ErrorInfo}", PHP_EOL; //Catch errors from Amazon SES.
+    }
+    
+    ?>
+
+  </div>
+  <div>Again, this is static HTML content.</div>
+</body>
+
+</html>

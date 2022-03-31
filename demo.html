@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title></title>
+    <!-- <script src="https://smtpjs.com/v3/smtp.js"></script> -->
+    <script src="js/smtp.js"></script>
+    <script type="text/javascript">
+        function sendEmail() {
+
+            var mailSubject = document.getElementById("mailSubject").value
+            var mailBody = document.getElementById("mailBody").value
+
+
+            Email.send({
+                // Host: "smtp.mail.us-east-1.awsapps.com",
+                // SecureToken : "554f299e-5d67-4682-b842-87ef4d6c1dd0",
+                Host: "smtp.us-east-1.amazonaws.com",
+                port: 465,
+                security : 'SSL',
+                // SMTPAuth: true,
+                // protocol: SSL,
+                // secure: true,
+                Username: "aniket.panchal@thinksense.ai",
+                Password: "8200497629$",
+                To: 'arj281096@gmail.com',
+                // From: "aniket.panchal@thinksense.ai",
+                Subject: mailSubject,
+                Body: mailBody,
+            })
+                .then(function (message) {
+                    alert("mail sent successfully")
+                });
+        }
+    </script>
+</head>
+
+
+
+<body>
+    <form method="POST" action="mailtest">
+        <table>
+            <tr>
+                <td>
+                    subject
+                </td>
+                <td>
+                    <input type="text" id="mailSubject" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Body
+                </td>
+                <td>
+                    <input type="text" id="mailBody" />
+                </td>
+            </tr>
+        </table>
+        <input type="button" value="Send Email" onclick="sendEmail()" />
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title></title>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script type="text/javascript">
+        function sendEmail() {
+
+            // var mailSubject = document.getElementById("mailSubject").value
+            // var mailFname = document.getElementById("mailFname").value
+            // var mailLname = document.getElementById("mailLname").value
+            var mailTo = document.getElementById("mailTo").value
+            // var mailMno = document.getElementById("mailMno").value
+            var mailBody = document.getElementById("mailBody").value
+
+
+            Email.send({
+                // SecureToken : "ae377984-5684-4bcc-89cd-bded7ab8f0e1",
+                Host: "smtp.gmail.com",
+                Username: "arj281096@gmail.com",
+                Password: "8200497629$",
+                To: mailTo,
+                From: "arj281096@gmail.com",
+                Subject: "OfficeInspector",
+                Body: mailBody,
+            })
+                .then(function (message) {
+                    alert("mail sent successfully")
+                });
+        }
+    </script>
+</head>
+
+
+
+<body>
+    <form method="post" action="mailtest">
+        <table>
+            <!-- <tr>
+                <td>
+                    First Name
+                </td>
+                <td>
+                    <input type="text" id="mailFname" />
+                </td>
+            </tr> -->
+            <!-- <tr>
+                <td>
+                    Last Name
+                </td>
+                <td>
+                    <input type="text" id="mailLname" />
+                </td>
+            </tr> -->
+            <tr>
+                <td>
+                    Email
+                </td>
+                <td>
+                    <input type="email" id="mailTo" />
+                </td>
+            </tr>
+            <!-- <tr>
+                <td>
+                    Phone Number
+                </td>
+                <td>
+                    <input type="text" id="mailMno" />
+                </td>
+            </tr> -->
+
+
+
+            <tr>
+                <td>
+                    message
+                </td>
+                <td>
+                    <input type="text" id="mailBody" />
+                </td>
+            </tr>
+        </table>
+        <input type="button" value="Send Email" onclick="sendEmail()" />
+    </form>
+</body>
+
+</html>
